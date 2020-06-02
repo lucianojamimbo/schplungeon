@@ -95,11 +95,13 @@ class entity():
     def entityturn(): #all entities take a turn
         None
 
+###################################################################################################################################
 class game():
     global locID
     global commands
     global movecommands
     def turn(): #the players turn
+        global locID
         entitiesinarea = []
         entitiesinareanames = []
         IDofentitiesinarea = ([i for i,loc in enumerate(entitylocationlist) if loc == locID])#ID of entities in current area
@@ -107,7 +109,6 @@ class game():
             entitiesinarea.append(entstat[i])
         for i in entitiesinarea:
             entitiesinareanames.append(i[0])
-        global locID
         isplayerinputvalid = False
         while isplayerinputvalid != True:
             player_input = input()
@@ -117,33 +118,35 @@ class game():
                         print("you cannot go in this direction")
                 else:
                     isplayerinputvalid = True
-                    locID = (area_data[locID][3][area_data[locID][4].index(player_input)])
-                
+                    locID = (area_data[locID][3][area_data[locID][4].index(player_input)]) #update players location
                 if len(player_input) > 1:
-                    if player_input.split()[0] == "kill":
-                
-                        if player_input.split()[1] not in entitiesinareanames:
-                            print("not here")
+                    if player_input.split()[0] == "kill":#if player uses kill command:
+                        if player_input.split()[1] not in entitiesinareanames: #see if specified entity is present
+                            print("entity not found")
                         else:
                             isplayerinputvalid = True
                             idofentitybeingattacked = IDofentitiesinarea[entitiesinareanames.index(player_input.split()[1])]
                             battle("player", idofentitybeingattacked)
-
                 if player_input.split()[0] not in commands: #split input first because some commands have args!
                     print("this is not a valid command!")
             else:
                 print("what are you doing?")
+###################################################################################################################################
+
     def display():
         #reset some variables
         entitiesinarea = []
         entitiesinareanames = []
-        #get stats about entities in current area
-        IDofentitiesinarea = ([i for i,loc in enumerate(entitylocationlist) if loc == locID])#ID of entities in current area
+        
+        #gets global ID of entities in players area:
+        IDofentitiesinarea = ([i for i,loc in enumerate(entitylocationlist) if loc == locID])
         for i in IDofentitiesinarea:
             entitiesinarea.append(entstat[i])
         #append names of entities in current area to a list
         for i in entitiesinarea:
             entitiesinareanames.append(i[0])
+        
+        #display information in the terminal:
         print("\n"*10)
         print("<>\n","Current area:")
         print(area_data[locID][1], "\n<>")
