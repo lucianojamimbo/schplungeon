@@ -1,0 +1,27 @@
+[
+
+[0, 
+"The void", 
+"It is empty here, you cannot feel anything, you feel as if a god mistakenly put you here", 
+[], 
+[]],
+
+[1, 
+"A dark, dimly lit corridor", 
+"you stand in a stone walled corridor, lit by a grate above you, there is a door to the east, and a door to the west", 
+[2,3], 
+["e", "w"]],
+
+[2,
+"An almost pitch black cell",
+"this room is almost completely dark, but a small crack in the door lets some light in, the door out of this cell is to the west",
+[1],
+["w"]],
+
+[3,
+"A pitch black cell",
+"you cannot see anything here, from your memory you can remember went west to get in here, so the exit is to the east",
+[1],
+["e"]]
+
+]
