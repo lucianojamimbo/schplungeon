@@ -18,6 +18,8 @@ playerhp = 20
 playerac = 15
 playeratkbonus = 5
 time_delay = 3
+playerxp = 0
+playerlv = 1
 
 #define some other variables:
 movecommands = ["n", "e", "s", "w"]
@@ -29,6 +31,20 @@ entitylocationlist = [0]
 entstat = [["null", 1]]
 
 #functions:
+def xp(entID):
+    global playerxp
+    global playerlv
+    if entstat[entID][0] == "rat":
+        playerxp = playerxp + 5
+    if entstat[entID][0] == "mouse":
+        playerxp = playerxp + 10
+    if entstat[entID][0] == "prisoner":
+        playerxp = playerxp + 20  
+    if playerxp >= 30 * playerlv:
+        playerlv = playerlv + 1
+        print("You are now level", playerlv, "!")
+        playerxp = 0
+        
 def OSpath(path):
     fullpath=os.getcwd()+path
     return fullpath
@@ -51,8 +67,9 @@ def battle(turn, enemID):
             else:
                 print("you missed!")
             if entstat[enemID][1] < 1:
-                entity.delete(enemID)
+                xp(enemID)
                 print("The foe is dead.")
+                entity.delete(enemID)
                 return
             turn = "entity"
         time.sleep(time_delay)
@@ -156,12 +173,16 @@ class game():
         print(area_data[locID][2],)
         print("exits:\n", area_data[locID][4])
         if len(entitiesinarea) != 0:
-            print("there are ",len(entitiesinarea)," creatures here")
+            print("there are ",len(entitiesinarea)," creature(s) here")
             print("you can see:")
             for i in entitiesinarea:
                 print("a", i[0])
+
+
+ 
     def over():
         print("game over")
+    
 
 
 
