@@ -1,4 +1,3 @@
-e
 #to do list:
 #battle system
 #player stats system
