@@ -1,4 +1,3 @@
-
 #imports:
 import os
 import json
@@ -22,7 +21,7 @@ entIDlist = [0]
 entitylocationlist = [0]
 entstat = [["null", 1]]
 
-#load up world data:
+#load up external data:
 #load up the different types of entities:
 with open(os.getcwd()+("\\data\\entitytypes.json"), "r") as temp:
     entitytypes = json.load(temp)
@@ -31,7 +30,6 @@ with open(os.getcwd()+("\\data\\entitytypes.json"), "r") as temp:
 with open(os.getcwd()+("\\data\\areadata.json"), "r") as temp:
     area_data = json.load(temp)
     temp.close()
-
 
 #functions:
 def xp(entID):
@@ -148,11 +146,11 @@ class game():
                     print("this is not a valid command!")
             else:
                 print("what are you doing?")
+    
     def display():
         #reset some variables
         entitiesinarea = []
         entitiesinareanames = []
-        
         #gets global ID of entities in players area:
         IDofentitiesinarea = ([i for i,loc in enumerate(entitylocationlist) if loc == locID])
         for i in IDofentitiesinarea:
@@ -160,7 +158,6 @@ class game():
         #append names of entities in current area to a list
         for i in entitiesinarea:
             entitiesinareanames.append(i[0])
-        
         #display information in the terminal:
         print("\n"*2)
         print("-------------------------------------------------------------")
@@ -174,7 +171,6 @@ class game():
             for i in entitiesinarea:
                 print("a", i[0])
         print("-------------------------------------------------------------")
-
         print("\n"*2)
 
     def over():
