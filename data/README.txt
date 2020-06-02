@@ -7,4 +7,4 @@ when creating area data, use this format:
 #and more once i program it in#]],
 ===========================================
 entity stats format:
-["NAME", <HP>, <AC>, <ATKBONUS>]
+["NAME", <HP>, <AC>, <ATKBONUS>, <XP GIVEN>]
