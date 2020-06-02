@@ -30,24 +30,26 @@ entIDlist = [0]
 entitylocationlist = [0]
 entstat = [["null", 1]]
 
+#load up world data:
+#load up the different types of entities:
+with open(os.getcwd()+("\\data\\entitytypes.json"), "r") as temp:
+    entitytypes = json.load(temp)
+    temp.close()
+#load up the area data list
+with open(os.getcwd()+("\\data\\areadata.json"), "r") as temp:
+    area_data = json.load(temp)
+    temp.close()
+
+
 #functions:
 def xp(entID):
     global playerxp
     global playerlv
-    if entstat[entID][0] == "rat":
-        playerxp = playerxp + 5
-    if entstat[entID][0] == "mouse":
-        playerxp = playerxp + 10
-    if entstat[entID][0] == "prisoner":
-        playerxp = playerxp + 20  
+    playerxp += entstat[entID][4]
     if playerxp >= 30 * playerlv:
         playerlv = playerlv + 1
         print("You are now level", playerlv, "!")
         playerxp = 0
-        
-def OSpath(path):
-    fullpath=os.getcwd()+path
-    return fullpath
 
 def battle(turn, enemID):
     global entstat
@@ -86,15 +88,8 @@ def battle(turn, enemID):
                 return
             turn = "player"
 
-#load up the different types of entities:
-with open(OSpath("\\data\\entitytypes.json"), "r") as temp:
-    entitytypes = json.load(temp)
-    temp.close()
-#load up the area data list
-with open(OSpath("\\data\\areadata.json"), "r") as temp:
-    area_data = json.load(temp)
-    temp.close()
 #define all the classes
+###################################################################################################################################
 class entity():
     
     def spawn(loc, entitytype):
@@ -114,7 +109,6 @@ class entity():
         
     def entityturn(): #all entities take a turn
         None
-
 ###################################################################################################################################
 class game():
     global locID
@@ -151,8 +145,6 @@ class game():
                     print("this is not a valid command!")
             else:
                 print("what are you doing?")
-###################################################################################################################################
-
     def display():
         #reset some variables
         entitiesinarea = []
@@ -178,16 +170,9 @@ class game():
             for i in entitiesinarea:
                 print("a", i[0])
 
-
- 
     def over():
         print("game over")
-    
-
-
-
-
-
+###################################################################################################################################    
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 0)
