@@ -1,12 +1,4 @@
-#to do list:
-#battle system
-#player stats system
-#item system
-#inventory system
-#system for using items
-#write+read data from/to a file that is created in the saves directory when a play creates a new game
-#write a guide on how to play and how to modify
-#=========================================================================================================
+
 #imports:
 import os
 import json
@@ -45,10 +37,21 @@ with open(os.getcwd()+("\\data\\areadata.json"), "r") as temp:
 def xp(entID):
     global playerxp
     global playerlv
+    global playerhp
+    global playeratkbonus
     playerxp += entstat[entID][4]
     if playerxp >= 30 * playerlv:
-        playerlv = playerlv + 1
+        playerlv += 1
+        playerhp *= (playerlv * (1.5/2))
+        playeratkbonus += 1
+        print("\n"*2)
+        print("-------------------------------------------------------------")
         print("You are now level", playerlv, "!")
+        print("You HP is now", playerhp)
+        print("Your AC has not changed.")
+        print("Your AttackBonus is now", playeratkbonus)
+        print("-------------------------------------------------------------")
+        print("\n"*2)
         playerxp = 0
 
 def battle(turn, enemID):
@@ -159,9 +162,10 @@ class game():
             entitiesinareanames.append(i[0])
         
         #display information in the terminal:
-        print("\n"*6)
-        print("<>\n","Current area:")
-        print(area_data[locID][1], "\n<>")
+        print("\n"*2)
+        print("-------------------------------------------------------------")
+        print("Current area:")
+        print(area_data[locID][1],)
         print(area_data[locID][2],)
         print("exits:\n", area_data[locID][4])
         if len(entitiesinarea) != 0:
@@ -169,6 +173,9 @@ class game():
             print("you can see:")
             for i in entitiesinarea:
                 print("a", i[0])
+        print("-------------------------------------------------------------")
+
+        print("\n"*2)
 
     def over():
         print("game over")
