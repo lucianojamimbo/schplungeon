@@ -150,7 +150,7 @@ class game():
             entitiesinareanames.append(i[0])
         
         #display information in the terminal:
-        print("\n"*10)
+        print("\n"*6)
         print("<>\n","Current area:")
         print(area_data[locID][1], "\n<>")
         print(area_data[locID][2],)
