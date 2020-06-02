@@ -11,11 +11,13 @@
 import os
 import json
 import random
+import time
 #base player stats and stuff
 locID = 1
 playerhp = 20
 playerac = 15
 playeratkbonus = 5
+time_delay = 3
 
 #define some other variables:
 movecommands = ["n", "e", "s", "w"]
@@ -37,6 +39,7 @@ def battle(turn, enemID):
     while True:
         if turn == "player":
             print("you are attacking", entstat[enemID][0])
+            print("your HP:", playerhp)
             print("<add choosing weapon here once extra weapons are added to the game>")
             roll=random.randint(1,20)
             roll+=playeratkbonus
@@ -49,10 +52,10 @@ def battle(turn, enemID):
                 print("you missed!")
             if entstat[enemID][1] < 1:
                 entity.delete(enemID)
-                print("victory royale! numbah one fortnite win!!1!11!")
+                print("The foe is dead.")
                 return
             turn = "entity"
-        
+        time.sleep(time_delay)
         if turn == "entity":
             print(entstat[enemID][0], "is attacking you!")
             roll=random.randint(1,20)
@@ -61,9 +64,8 @@ def battle(turn, enemID):
                 print("you were hit!")
                 damroll = random.randint(1,8)
                 playerhp -= damroll
-                print(playerhp)
             if playerhp < 1:
-                print("you dieded!")
+                print("you died!")
                 return
             turn = "player"
 
@@ -78,12 +80,13 @@ with open(OSpath("\\data\\areadata.json"), "r") as temp:
 #define all the classes
 class entity():
     
-    def spawn(start, entitytype):
+    def spawn(loc, entitytype):
         global entIDlist
         global entitylocationlist
         global entstat
+        global entitytypes
         entIDlist.append(len(entIDlist))
-        entitylocationlist.append(start)
+        entitylocationlist.append(loc)
         entstat.append(entitytypes[entitytype])
     
     def delete(IDtoberemoved):
@@ -164,13 +167,14 @@ class game():
 
 
 
-entity.spawn(2, 1)
+entity.spawn(random.randint(1,3), 1)
+entity.spawn(random.randint(1,3), 1)
+entity.spawn(random.randint(1,3), 0)
+entity.spawn(random.randint(1,3), 1)
+entity.spawn(random.randint(1,3), 0)
+entity.spawn(2, 2)
+entity.spawn(3, 2)
 entity.spawn(2, 0)
-game.display()
-game.turn()
-game.display()
-game.turn()
-game.display()
-game.turn()
-game.display()
-game.turn()
+for i in range(0,6): #run game for specified amount of turns
+    game.display()
+    game.turn()
