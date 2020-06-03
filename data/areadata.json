@@ -2,26 +2,35 @@
 
 [0, 
 "The void", 
-"It is empty here, you cannot feel anything, you feel as if a god mistakenly put you here", 
+"It is empty here, you cannot feel anything, you feel as if a god mistakenly put you here. What now?", 
 [], 
 []],
 
 [1, 
 "A dark, dimly lit corridor", 
-"you stand in a stone walled corridor, lit by a grate above you, there is a door to the east, and a door to the west", 
-[2,3], 
-["e", "w"]],
+"you stand in a stone walled corridor, lit by a grate above you, there is a door to the east, west and north. What now?", 
+[2,3,4], 
+["e", "w", "n"]],
 
 [2,
 "An almost pitch black cell",
-"this room is almost completely dark, but a small crack in the door lets some light in, the door out of this cell is to the west",
+"this room is almost completely dark, but a small crack in the door lets some light in, the door out of this cell is to the west. What now?",
 [1],
 ["w"]],
 
 [3,
 "A pitch black cell",
-"you cannot see anything here, from your memory you can remember went west to get in here, so the exit is to the east",
+"you cannot see anything here, from your memory you can remember went west to get in here, so the exit is to the east. What now?",
 [1],
-["e"]]
-
+["e"]],
+[4,
+"A small room",
+"you can see here, something catches your eye. A hiddeen passageway imbedded in the west wall. What now?",
+[1,5],
+["s","w"]],
+[5,
+"A well lit corridor",
+"you can see here. There is an exit to the west UNDER DEVELOPEMENT DO NOT CROSS INTO VOID and a hidden passage to the east. What now?",
+[0, 5],
+["w","e"]]
 ]
