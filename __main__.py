@@ -162,12 +162,16 @@ class game():
                             isplayerinputvalid = True
                             idofentitybeingattacked = IDofentitiesinarea[entitiesinareanames.index(player_input.split()[1])]
                             battle("player", idofentitybeingattacked)
+                            
                 if player_input == "endgame":
                     print("Goodbye, you acheived Level", playerlv, "!")
                     time.sleep(med_dly)
                     print("Exiting..")
                     time.sleep(med_dly)
                     sys.exit()
+                if player_input == "exitnow" or player_input == "quitnow":
+                    sys.exit()
+                    
                 if player_input.split()[0] not in commands: #split input first because some commands have args!
                     print("that is not a valid command!")
             else:
@@ -224,13 +228,34 @@ entity.spawn(2, 1)
 entity.spawn(2, 0)
 
 #game intro
-print("Welcome to the dungeon.")
-print("What is your name?")
-name = input(">")
-print("Welcome to Schplungeon {0}!".format(name))
-print("You awake in a dungeon. You must escape!")
-temp = input("Press Enter")
+def title_scr():
+    option = input(">")
+    if option == "play" or option == "Play":
+        print("What is your name?")
+        name = input(">")
+        print("Welcome to Schplungeon {0}!".format(name))
+        print("You must escape!")
+        time.sleep(short_dly)
+        gamerun()
+    if option == "help" or option == "Help":
+        print("Use commands n e s w to move and kill (enemy name) to attack. Use endgame to quit. Now type play and start your adventure")
+        title_scr()
+    if option == "quit" or option == "Quit" or option == "endgame" or option == "exitnow" or option == "quitnow":
+        print("Exiting..")
+        time.sleep(short_dly)
+        sys.exit()
+    else:
+        print("Invalid command - type help")
+        title_scr()
+        
 
-while True: #runs the game 
-    game.display()
-    game.turn()
+#runs the game         
+def gamerun():
+    while True: 
+        game.display()
+        game.turn()
+
+print("-------------------------------")
+print("Welcome to the Schplungeon.")
+print("-------------------------------")   
+title_scr()
