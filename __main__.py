@@ -112,6 +112,15 @@ class entity():
         entstat.append(entitytypes[entitytype])
     
     def delete(IDtoberemoved):
+        global entIDlist
+        global entitylocationlist
+        global entstat
+        newidlist = []
+        for item in entIDlist[:IDtoberemoved]:
+            newidlist.append(item)
+        for item in entIDlist[IDtoberemoved:]:
+            newidlist.append(item-1)
+        entIDlist = newidlist[:]
         del entIDlist[IDtoberemoved]
         del entitylocationlist[IDtoberemoved]
         del entstat[IDtoberemoved]
