@@ -48,7 +48,7 @@ def xp(entID):
     playerxp += entstat[entID][4]
     if playerxp >= 30 * playerlv:
         playerlv += 1
-        playerhp *= (playerlv * (1.5/2))
+        playerhp += (playerlv * 5)
         playeratkbonus += 1
         print("\n"*2)
         print("-------------------------------------------------------------")
@@ -95,6 +95,7 @@ def battle(turn, enemID):
                 playerhp -= damroll
             if playerhp < 1:
                 print("you died!")
+                game.over()
                 return
             turn = "player"
 
@@ -163,7 +164,7 @@ class game():
                             battle("player", idofentitybeingattacked)
                 if player_input == "endgame":
                     print("Goodbye, you acheived Level", playerlv, "!")
-                    time.sleep(long_dly)
+                    time.sleep(med_dly)
                     print("Exiting..")
                     time.sleep(med_dly)
                     sys.exit()
@@ -202,9 +203,12 @@ class game():
 
     def over():
         print("game over.")
+        time.sleep(long_dly)
+        sys.exit()
+        
 ###################################################################################################################################    
 
-#spawning
+#spawning (this really could be a loop like come on)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 0)
