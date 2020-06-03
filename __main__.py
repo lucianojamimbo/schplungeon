@@ -4,14 +4,20 @@ import os
 import json
 import random
 import time
+import sys
 #base player stats and stuff
 locID = 1
 playerhp = 20
 playerac = 15
 playeratkbonus = 5
-time_delay = 3
 playerxp = 0
 playerlv = 1
+
+#delay times
+short_dly = 1
+med_dly = 3
+long_dly = 5
+
 
 #define some other variables:
 movecommands = ["n", "e", "s", "w"]
@@ -48,8 +54,8 @@ def xp(entID):
         print("-------------------------------------------------------------")
         print("You are now level", playerlv, "!")
         print("You HP is now", playerhp)
+        print("Your Attack Bonus is now", playeratkbonus)
         print("Your AC has not changed.")
-        print("Your AttackBonus is now", playeratkbonus)
         print("-------------------------------------------------------------")
         print("\n"*2)
         playerxp = 0
@@ -75,6 +81,7 @@ def battle(turn, enemID):
                 xp(enemID)
                 print("The foe is dead.")
                 entity.delete(enemID)
+                time.sleep(time_dshort)
                 return
             turn = "entity"
         time.sleep(time_delay)
@@ -128,7 +135,8 @@ class game():
             entitiesinareanames.append(i[0])
         isplayerinputvalid = False
         while isplayerinputvalid != True:
-            player_input = input()
+            player_input = input(">")
+            print("\n"*2)
             if len(player_input) != 0:
                 if player_input not in area_data[locID][4]: #check if player_input is a movement cmd
                     if player_input in movecommands:
@@ -144,8 +152,14 @@ class game():
                             isplayerinputvalid = True
                             idofentitybeingattacked = IDofentitiesinarea[entitiesinareanames.index(player_input.split()[1])]
                             battle("player", idofentitybeingattacked)
+                if player_input == "endgame":
+                    print("Goodbye, you acheived Level", playerlv, "!")
+                    time.sleep(long_dly)
+                    print("Exiting..")
+                    time.sleep(long_dly)
+                    sys.exit()
                 if player_input.split()[0] not in commands: #split input first because some commands have args!
-                    print("this is not a valid command!")
+                    print("that is not a valid command!")
             else:
                 print("what are you doing?")
     def display():
@@ -175,19 +189,24 @@ class game():
                 print("a", i[0])
         print("-------------------------------------------------------------")
 
-        print("\n"*2)
+        print("\n")
 
     def over():
-        print("game over")
+        print("game over.")
 ###################################################################################################################################    
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 0)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 0)
-entity.spawn(2, 2)
-entity.spawn(3, 2)
+entity.spawn(random.randint(1,4), 1)
+entity.spawn(random.randint(1,4), 1)
+entity.spawn(random.randint(1,4), 0)
+entity.spawn(random.randint(1,5), 1)
+entity.spawn(random.randint(1,5), 0)
+entity.spawn(5, 3)
+entity.spawn(2, 1)
 entity.spawn(2, 0)
-for i in range(0,6): #run game for specified amount of turns
+for i in range(0,10): #run game for specified amount of turns
     game.display()
     game.turn()
