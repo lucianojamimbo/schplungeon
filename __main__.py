@@ -207,6 +207,6 @@ entity.spawn(random.randint(1,5), 0)
 entity.spawn(5, 3)
 entity.spawn(2, 1)
 entity.spawn(2, 0)
-for i in range(0,10): #run game for specified amount of turns
+while True: #runs the game 
     game.display()
     game.turn()
