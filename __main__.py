@@ -194,6 +194,8 @@ class game():
     def over():
         print("game over.")
 ###################################################################################################################################    
+
+#spawning
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 1)
 entity.spawn(random.randint(1,3), 0)
@@ -207,6 +209,15 @@ entity.spawn(random.randint(1,5), 0)
 entity.spawn(5, 3)
 entity.spawn(2, 1)
 entity.spawn(2, 0)
+
+#game intro
+print("Welcome to the dungeon.")
+print("What is your name?")
+name = input(">")
+print("Welcome to Schplungeon {0}!".format(name))
+print("You awake in a dungeon. You must escape!")
+temp = input("Press Enter")
+
 while True: #runs the game 
     game.display()
     game.turn()
