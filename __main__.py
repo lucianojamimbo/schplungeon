@@ -81,10 +81,10 @@ def battle(turn, enemID):
                 xp(enemID)
                 print("The foe is dead.")
                 entity.delete(enemID)
-                time.sleep(time_dshort)
+                time.sleep(short_dly)
                 return
             turn = "entity"
-        time.sleep(time_delay)
+        time.sleep(med_dly)
         if turn == "entity":
             print(entstat[enemID][0], "is attacking you!")
             roll=random.randint(1,20)
@@ -156,7 +156,7 @@ class game():
                     print("Goodbye, you acheived Level", playerlv, "!")
                     time.sleep(long_dly)
                     print("Exiting..")
-                    time.sleep(long_dly)
+                    time.sleep(med_dly)
                     sys.exit()
                 if player_input.split()[0] not in commands: #split input first because some commands have args!
                     print("that is not a valid command!")
