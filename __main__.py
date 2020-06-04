@@ -221,7 +221,7 @@ class game():
         print()
         play2 = input("Would you like to play again (y/n): ")
         if play2 == "y":
-            title_scr
+            the_intro()
         else:
             time.sleep(short_dly)
             sys.exit()
@@ -266,20 +266,26 @@ def title_scr():
         title_scr()
         
 
-#runs the game         
+      
+        
+#quick test func
+def kill_test():
+    global playerhp
+    playerhp = 1
+    
+def the_intro():
+    print("--------------------------------------")  
+    print("     Welcome to the Schplungeon.")
+    print("--------------------------------------")  
+    print("If you are new here type help to start")
+    print("--------------------------------------")  
+    title_scr()
+    
+    
+#runs the game   
 def gamerun():
     while True: 
         game.display()
         game.turn()
 
-def kill_test():
-    global playerhp
-    playerhp = 1
-    
-
-print("--------------------------------------")  
-print("     Welcome to the Schplungeon.")
-print("--------------------------------------")  
-print("If you are new here type help to start")
-print("--------------------------------------")  
-title_scr()
+the_intro()
