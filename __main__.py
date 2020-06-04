@@ -21,7 +21,7 @@ long_dly = 5
 
 #define some other variables:
 movecommands = ["n", "e", "s", "w"]
-commands = ["n", "e", "s", "w", "kill"]
+commands = ["n", "e", "s", "w", "kill", "endgame" "y", "n", "killtest", "quitnow"]
 
 #entity related variables:
 entIDlist = [0]
@@ -94,7 +94,9 @@ def battle(turn, enemID):
                 damroll = random.randint(1,8)
                 playerhp -= damroll
             if playerhp < 1:
-                print("you died!")
+                print("--------------------------------------")
+                print("             you died.")
+                print("--------------------------------------")
                 game.over()
                 return
             turn = "player"
@@ -146,7 +148,6 @@ class game():
         isplayerinputvalid = False
         while isplayerinputvalid != True:
             player_input = input(">")
-            print("\n"*2)
             if len(player_input) != 0:
                 if player_input not in area_data[locID][4]: #check if player_input is a movement cmd
                     if player_input in movecommands:
@@ -163,6 +164,7 @@ class game():
                             idofentitybeingattacked = IDofentitiesinarea[entitiesinareanames.index(player_input.split()[1])]
                             battle("player", idofentitybeingattacked)
                             
+                            
                 if player_input == "endgame":
                     print("Goodbye, you acheived Level", playerlv, "!")
                     time.sleep(med_dly)
@@ -171,7 +173,14 @@ class game():
                     sys.exit()
                 if player_input == "exitnow" or player_input == "quitnow":
                     sys.exit()
-                    
+                if player_input == "killtest":
+                    sure = input("Are you sure?: ")
+                    if sure == "y":
+                        kill_test()
+                    else:
+                        turn
+                       
+                        
                 if player_input.split()[0] not in commands: #split input first because some commands have args!
                     print("that is not a valid command!")
             else:
@@ -206,9 +215,16 @@ class game():
         print("\n")
 
     def over():
-        print("game over.")
-        time.sleep(long_dly)
-        sys.exit()
+        print("--------------------------------------")  
+        print("             game over.")
+        print("--------------------------------------")
+        print()
+        play2 = input("Would you like to play again (y/n): ")
+        if play2 == "y":
+            title_scr
+        else:
+            time.sleep(short_dly)
+            sys.exit()
         
 ###################################################################################################################################    
 
@@ -231,6 +247,7 @@ entity.spawn(2, 0)
 def title_scr():
     option = input(">")
     if option == "play" or option == "Play":
+        print()
         print("What is your name?")
         name = input(">")
         print("Welcome to Schplungeon {0}!".format(name))
@@ -255,7 +272,14 @@ def gamerun():
         game.display()
         game.turn()
 
-print("-------------------------------")
-print("Welcome to the Schplungeon.")
-print("-------------------------------")   
+def kill_test():
+    global playerhp
+    playerhp = 1
+    
+
+print("--------------------------------------")  
+print("     Welcome to the Schplungeon.")
+print("--------------------------------------")  
+print("If you are new here type help to start")
+print("--------------------------------------")  
 title_scr()
